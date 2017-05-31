@@ -32,7 +32,7 @@ public class LoginActivity extends JFrame implements  ActionListener,HyperlinkLi
     JLabel password = new JLabel("密码：");   
     JTextField JName = new JTextField(10); //明文账号输入  
     JPasswordField JPassword = new JPasswordField(10); // 非明文密码输入； 
-    
+    	
     public LoginActivity(){
     	this.setBackground(Color.RED);
     	Container con=this.getContentPane();//生成一个容器	
