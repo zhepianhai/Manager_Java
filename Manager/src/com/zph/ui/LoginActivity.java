@@ -40,7 +40,7 @@ public class LoginActivity extends JFrame implements  ActionListener,HyperlinkLi
     	JPanel jp = new JPanel();  
         name.setHorizontalAlignment(SwingConstants.LEFT);  //设置该组件的对齐方式为向右对齐  
         password.setHorizontalAlignment(SwingConstants.LEFT);  
-        name.setBackground(Color.black);
+//        name.setBackground(Color.black);
         
         jp.add(name);   //将内容加到面板jp上  
         jp.add(JName);    
