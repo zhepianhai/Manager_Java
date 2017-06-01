@@ -197,7 +197,7 @@ public class FileUtil {
 			String read;
 			bufread = new BufferedReader(new FileReader(file));
 			while ((read = bufread.readLine()) != null) {
-				// 先进行解密
+				// 先进行解密 解密需要把之前的添加的\r\n去掉，因为在AES加密中，字符长度是16的整数倍
 				list.add(QEncodeUtil.aesDecrypt(read.toString().replace("\r\n", "")));
 			}
 			bufread.close();
