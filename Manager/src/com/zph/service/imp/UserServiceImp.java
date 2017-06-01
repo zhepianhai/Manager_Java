@@ -7,9 +7,8 @@ import com.zph.pojo.User;
 import com.zph.service.UserService;
 import com.zph.util.FileUtil;
 
-public class UserServiceImp implements UserService{
-	private static final String USERPATH="user/myUsers.zph";
-
+public class UserServiceImp implements UserService {
+	private static final String USERPATH = "user/myUsers.zph";
 
 	@Override
 	public String DeleteOneUser(String username, String phone) {
@@ -31,7 +30,8 @@ public class UserServiceImp implements UserService{
 
 	@Override
 	public String AddOneUser(User user) {
-		FileUtil.writeByFileReader(USERPATH,user.toString());
+		FileUtil.writeByFileReader(USERPATH, user.toString());
+
 		return null;
 	}
 
