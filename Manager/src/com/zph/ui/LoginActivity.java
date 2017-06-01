@@ -128,6 +128,7 @@ public class LoginActivity extends JFrame implements ActionListener,
 						JOptionPane.YES_NO_OPTION);
 				return;
 			}
+			//w3TxnlUyxm25UKsNCH+6ifhdklcSwtStRbbxxjkRqnonstcHgV7oOeq/Y31CzObt
 			if ("".equals(JPassword.getText())) {
 				JOptionPane.showConfirmDialog(null, "密码不能为空", "确认",
 						JOptionPane.YES_NO_OPTION);

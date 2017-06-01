@@ -168,7 +168,7 @@ public class FileUtil {
 			if (!file.exists()) {
 				createFile(url);
 			}
-
+			
 			FileWriter fw = new FileWriter(file, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			// 加密
@@ -198,7 +198,7 @@ public class FileUtil {
 			bufread = new BufferedReader(new FileReader(file));
 			while ((read = bufread.readLine()) != null) {
 				// 先进行解密
-				list.add(QEncodeUtil.aesDecrypt(read.toString()));
+				list.add(QEncodeUtil.aesDecrypt(read.toString().replace("\r\n", "")));
 			}
 			bufread.close();
 			return list;
