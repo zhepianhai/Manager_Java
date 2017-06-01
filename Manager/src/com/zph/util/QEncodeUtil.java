@@ -160,7 +160,7 @@ public class QEncodeUtil {
 
 		return new String(decryptBytes);
 	}
-
+	
 	/**
 	 * 将base 64 code AES解密
 	 * 
