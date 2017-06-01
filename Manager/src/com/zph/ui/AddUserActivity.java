@@ -1,11 +1,11 @@
 package com.zph.ui;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -16,7 +16,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
-import com.zph.util.FileUtil;
+import com.zph.pojo.User;
+import com.zph.service.UserService;
+import com.zph.service.imp.UserServiceImp;
 
 /**
  * 添加用户
@@ -33,9 +35,12 @@ public class AddUserActivity extends JFrame implements ActionListener{
 	private JButton ok = new JButton("确定"); 
 	
 	private JTextField JName,JName1,JName2,JName3;
+	
+	private UserService userService;
 	public AddUserActivity(){
 		initView();
 		AddListener();
+		userService=new UserServiceImp();
 		this.setSize(WIDTH, HEIGHT);
 		this.setTitle("添加用户");
 		this.setVisible(true);  
@@ -112,7 +117,7 @@ public class AddUserActivity extends JFrame implements ActionListener{
 //							.setLookAndFeel(new org.jvnet.substance.skin.SubstanceDustCoffeeLookAndFeel());
 					//例如按照上面的步骤，可以看见一个叫，"SubstanceOfficeBlue2007LookAndFeel.class"，想要替换成这个皮肤，就可以向下面这样写
 					//UIManager
-					.setLookAndFeel(new org.jvnet.substance.skin.SubstanceCremeCoffeeLookAndFeel());
+					.setLookAndFeel(new org.jvnet.substance.skin.SubstanceMistAquaLookAndFeel());
 					// 运行一下，皮肤就可以换了
 					// 想要详细了解的同学，可以去百度这个第三方包：substance.jar
 				} catch (Exception e) {
@@ -129,14 +134,16 @@ public class AddUserActivity extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==ok){
 			//写入数据库
-			StringBuffer sb=new StringBuffer();
-			sb.append("username:"+JName.getText()+"\n");
-			sb.append("userphone:"+JName1.getText()+"\n");
-			sb.append("useraddress:"+JName2.getText()+"\n");
-			sb.append("userothers:"+JName3.getText()+"\n");
-//			FileUtil.createDir("user");
-//			FileUtil.createFile("user/userList.zph");
-			FileUtil.writeByFileReader("user/userList1.zph",sb.toString());
+			User user=new User();
+			user.setAddress(JName2.getText());
+			user.setUsername(JName.getText());
+			user.setOther(JName3.getText());
+			user.setPhone(JName1.getText());
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			user.setTime(sdf.format(new Date()));
+			userService.AddOneUser(user);
+			this.dispose();
+			
 		}
 		
 	}

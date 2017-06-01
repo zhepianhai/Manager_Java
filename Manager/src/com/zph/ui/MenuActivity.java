@@ -2,6 +2,7 @@ package com.zph.ui;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,6 +41,8 @@ public class MenuActivity extends JFrame implements ActionListener{
 		this.setVisible(true);  
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);//居中显示
+	    Image img = Toolkit.getDefaultToolkit ().getImage("src/icon/ui_icon/icon_app.png");
+        this.setIconImage(img);
 	}
 	
 	/**
@@ -63,7 +66,7 @@ public class MenuActivity extends JFrame implements ActionListener{
 					 * 想要修改皮肤的话，只需要更改，下面这个函数的参数，具体改成什么样，可以打开，Referenced Libraries -> 点击substance.jar -> 找到org.jvnet.substance.skin这个包  -> 将下面的SubstanceDustCoffeeLookAndFeel 替换成 刚刚打开的包下的任意一个“Substance....LookAndFeel”即可
 					 */
 					UIManager
-							.setLookAndFeel(new org.jvnet.substance.skin.SubstanceDustCoffeeLookAndFeel());
+							.setLookAndFeel(new org.jvnet.substance.skin.SubstanceMistAquaLookAndFeel());
 					//例如按照上面的步骤，可以看见一个叫，"SubstanceOfficeBlue2007LookAndFeel.class"，想要替换成这个皮肤，就可以向下面这样写
 					//UIManager
 //					.setLookAndFeel(new org.jvnet.substance.skin.SubstanceOfficeBlue2007LookAndFeel());

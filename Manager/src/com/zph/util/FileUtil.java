@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +18,8 @@ import java.util.List;
  * */
 public class FileUtil {
 	private static final String Home="D:/Manager/";
-	
+	private static final String OK="OK";
+	private static final String ERROR="ERROR";
 	
 	/**
 	 * 创建本地文件夹
@@ -163,7 +165,7 @@ public class FileUtil {
 	     * 追加写入
 	     * */
 	    
-	    public static void writeByFileReader(String url,String content) {
+	    public static String writeByFileReader(String url,String content) {
 			try {
 				
 
@@ -180,18 +182,19 @@ public class FileUtil {
 	            bw.write("\r\n");
 	            bw.flush();  
 	            bw.close();
+	            return OK;
 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
+			return ERROR;
 		}
 	    
 	    
 	    
 	    public static List<String> readByBufferedReader(String fileName) {
 	    	fileName=Home+fileName;
-	    	List<String> list=new LinkedList<>();
+	    	List<String> list=new ArrayList();
 	    	StringBuffer sb=new StringBuffer();
 			try {
 				File file = new File(fileName);
