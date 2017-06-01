@@ -40,6 +40,8 @@ public class QEncodeUtil {
 		return new BigInteger(1, bytes).toString(radix);// 这里的1代表正数
 	}
 
+	
+	
 	/**
 	 * base 64 encode
 	 * 
