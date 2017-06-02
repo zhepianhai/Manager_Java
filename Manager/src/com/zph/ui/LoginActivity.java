@@ -23,6 +23,7 @@ import javax.swing.UIManager;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
+import com.zph.contact.Contact;
 import com.zph.service.LoginService;
 import com.zph.service.imp.LoginServiceImp;
 
@@ -142,7 +143,8 @@ public class LoginActivity extends JFrame implements ActionListener,
 				this.dispose();
 				// write log to localhostDataBase
 				loginService.writeLoginLog(JName.getText(), new Date());
-				new MenuActivity(JName.getText());
+				Contact.UserName=JName.getText();
+				new MenuActivity();
 			} else {
 				JOptionPane.showMessageDialog(null, "用户或密码错误！请从新登录！");
 				// 显示信息提示框
