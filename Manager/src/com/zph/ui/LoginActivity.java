@@ -40,12 +40,12 @@ public class LoginActivity extends JFrame implements ActionListener,
 	JPasswordField JPassword = new JPasswordField(10); // 非明文密码输入；
 
 	LoginService loginService;
-
+	private Container con;
 	public LoginActivity() {
 		this.setBackground(Color.RED);
 		loginService = new LoginServiceImp();
-
-		Container con = this.getContentPane();// 生成一个容器
+		
+		con= this.getContentPane();// 生成一个容器
 		con.setLayout(null);
 		JPanel jp = new JPanel();
 		name.setHorizontalAlignment(SwingConstants.LEFT); // 设置该组件的对齐方式为向右对齐
@@ -87,13 +87,13 @@ public class LoginActivity extends JFrame implements ActionListener,
 		login.addActionListener(this); // 登录增加事件监听
 		exit.addActionListener(this); // 退出增加事件监听
 		regise.addActionListener(this); // 退出增加事件监听
-
+			
 		con.add(jp); // 将整块面板定义在中间
 		con.add(jp1); // 将整块面板定义在中间
 		con.add(jp2); // 将整块面板定义在中间
 		con.add(jp3);
 		con.add(jlpic);
-
+		
 		this.setSize(WIDTH, HEIGHT);
 		Image img = Toolkit.getDefaultToolkit().getImage(
 				"src/icon/ui_icon/icon_app.png");

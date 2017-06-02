@@ -168,14 +168,14 @@ public class FileUtil {
 			if (!file.exists()) {
 				createFile(url);
 			}
-			
+
 			FileWriter fw = new FileWriter(file, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			// 加密
 			String contentt = QEncodeUtil.aesEncrypt(content);
 			bw.write(contentt);
-			// 换行
-			bw.write("\r\n");
+			// 分割
+			bw.write("*****");
 			bw.flush();
 			bw.close();
 			return OK;
@@ -193,13 +193,21 @@ public class FileUtil {
 		try {
 			File file = new File(fileName);
 			// 读取文件，并且以utf-8的形式写出去
+			if (!file.exists()) {
+				return list;
+			}
 			BufferedReader bufread;
 			String read;
 			bufread = new BufferedReader(new FileReader(file));
 			while ((read = bufread.readLine()) != null) {
-				// 先进行解密 解密需要把之前的添加的\r\n去掉，因为在AES加密中，字符长度是16的整数倍
-				list.add(QEncodeUtil.aesDecrypt(read.toString().replace("\r\n", "")));
+				sb.append(read.toString());
 			}
+			String[] data = sb.toString().split("\\*\\*\\*\\*\\*");
+			// 先进行解密 解密需要把之前的添加的\r\n去掉，因为在AES加密中，字符长度是16的整数倍
+			for (int i = data.length-1; i >=0;--i) {
+				list.add(QEncodeUtil.aesDecrypt(data[i]));
+			}
+			System.out.println("集合："+list.toString());
 			bufread.close();
 			return list;
 		} catch (FileNotFoundException ex) {
