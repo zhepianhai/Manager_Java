@@ -1,31 +1,22 @@
 package com.zph.ui;
 
-import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
+import java.awt.LayoutManager;
 import java.awt.Toolkit;
-import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -36,6 +27,7 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 import com.zph.contact.Contact;
 import com.zph.pojo.User;
 import com.zph.service.UserService;
@@ -58,7 +50,13 @@ public class MenuActivity extends JFrame implements ActionListener {
 	// 系统界面布局
 	private JPanel panel_main = null;
 	private JPanel Panel_left = null;
+	
+	
 	private JPanel panel_bottom = null;
+	private JPanel panel_bottom_message=null;
+	private JLabel Bottom_lbl_payout=null;
+	
+	
 	private JPanel panel_center = null;
 	private JPanel panel_userlist = null;
 	// 其它
@@ -113,17 +111,18 @@ public class MenuActivity extends JFrame implements ActionListener {
 		}
 		return panel_center;
 	}
-
+	
 	/**
 	 * 得到用户列表
 	 * */
 	private JPanel getTableUser() {
 		if (panel_userlist == null) {
 			panel_userlist=new JPanel();
+			panel_userlist.setBounds(0,0, d.width, d.height);
 			List<User> list = userService.SelectAllUser();
 			// 展示数据
 			if (list.size() == 0)
-				return null;
+				return panel_userlist;
 			Object[][] data = new Object[list.size()][5];
 			for (int i = 0; i < list.size(); ++i) {
 				data[i][0] = list.get(i).getUsername();
@@ -153,10 +152,30 @@ public class MenuActivity extends JFrame implements ActionListener {
 		if (panel_bottom == null) {
 			panel_bottom = new JPanel();
 			panel_bottom.setBounds(0, d.height - 10, d.width, d.height);
+			panel_bottom.setBackground(Color.BLUE);
 			panel_bottom.setLayout(new GridLayout(6, 1));
+			panel_bottom.add(getBottomMessage(),null);
 		}
 		return panel_bottom;
 	}
+	/**
+	 * 底部的信息
+	 * */
+	private JPanel getBottomMessage() {
+		if(null==panel_bottom_message){
+			panel_bottom_message=new JPanel();
+			panel_bottom_message.setLayout(new FlowLayout(FlowLayout.CENTER));
+			if(null==Bottom_lbl_payout){
+				Bottom_lbl_payout=new JLabel();
+				Bottom_lbl_payout.setText("当前用户是："+Contact.UserName);
+				
+			}
+			panel_bottom_message.add(Bottom_lbl_payout);
+			
+		}
+		return panel_bottom_message;
+	}
+
 
 	/**
 	 * 左侧
@@ -164,8 +183,9 @@ public class MenuActivity extends JFrame implements ActionListener {
 	private JPanel getPanel_left() {
 		if (Panel_left == null) {
 			Panel_left = new JPanel();
-			Panel_left.setBounds(0, d.height - 10, 10, d.height);
-			Panel_left.setLayout(new GridLayout(6, 1));
+			Panel_left.setBounds(0, 0, 100, d.height);
+			Panel_left.setLayout(new FlowLayout(FlowLayout.LEFT));
+			Panel_left.setBackground(Color.RED);
 		}
 		return Panel_left;
 	}
@@ -195,7 +215,7 @@ public class MenuActivity extends JFrame implements ActionListener {
 				JFrame.setDefaultLookAndFeelDecorated(true);
 				JDialog.setDefaultLookAndFeelDecorated(true);
 				try {
-
+				
 					UIManager
 							.setLookAndFeel(new org.jvnet.substance.skin.SubstanceMistAquaLookAndFeel());
 				} catch (Exception e) {
@@ -206,15 +226,12 @@ public class MenuActivity extends JFrame implements ActionListener {
 				new MenuActivity();
 			}
 		});
-
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == t1) {
 			// 打开一个添加用户的界面窗口
-
 			new AddUserActivity();
 		} else if (e.getSource() == t2) {
 		}

@@ -6,6 +6,6 @@
 			<accessrule kind="accessible" pattern="**"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/adminZPH/Desktop/Demo/Demo/libs/substance.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/substance.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
